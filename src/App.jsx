@@ -1,15 +1,17 @@
 import { Link, Outlet, createBrowserRouter } from "react-router-dom";
-import DesafioUm from "./pages/DesafioUm";
 import DesafioRedux from "./pages/DesafioRedux";
 import DesafioToolkit from "./pages/DesafioToolkit";
-import store from "./pages/store/store";
+import DesafioTrkQuery from "./pages/DesafioTrkQuery";
 import { Provider } from "react-redux";
+import DesafioUseReducer from "./pages/DesafioUseReducer";
+import { storeQuery, storeRedux, storeToolkit } from "./pages/store/store";
+
 
 const routes = [
   {
     path: "/",
     element: (
-      <Provider store={store}>
+     
         <div>
           <ul>
             <li>
@@ -21,15 +23,19 @@ const routes = [
             <li>
               <Link to="desafio-toolkit">DesafioToolkit</Link>
             </li>
+            <li>
+              <Link to="desafio-trkQuery">DesafioTrkQuery</Link>
+            </li>
           </ul>
           <Outlet />
         </div>
-      </Provider>
+   
     ),
     children: [
-      { path: "desafio-useReducer", element: <DesafioUm /> },
-      { path: "desafio-redux", element: <DesafioRedux /> },
-      { path: "desafio-toolkit", element: <DesafioToolkit /> }
+      { path: "desafio-useReducer", element: <DesafioUseReducer /> },
+      { path: "desafio-redux", element:<Provider store={storeRedux}> <DesafioRedux /> </Provider>},
+      { path: "desafio-toolkit", element:<Provider store={storeToolkit}> <DesafioToolkit /> </Provider>},
+      { path: "desafio-trkQuery", element: <Provider store={storeQuery}> <DesafioTrkQuery /> </Provider>}
     ]
   }
 ];

@@ -9,9 +9,9 @@ import {
   alterarValorEdicaoAction,
 } from "./store/actions";
 
-export default function ListaDeTarefas() {
-  const rascunho = useSelector((state) => state.tarefas.rascunho);
-  const todos = useSelector((state) => state.tarefas.todos);
+export default function DesafioRedux() {
+  const rascunho = useSelector((state) => state.rascunho);
+  const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
   const adicionarTarefa = () => {
@@ -43,12 +43,15 @@ export default function ListaDeTarefas() {
       <input
         value={rascunho}
         onChange={(e) => {
+          
+          console.log(alterarRascunho(e.target.value))
           dispatch(alterarRascunho(e.target.value));
+          
         }}
       />
       <button onClick={adicionarTarefa}>Adicionar</button>
       <ul>
-        {todos.map((tarefa) => (
+        {todos?.map((tarefa) => (
           <li key={tarefa.id}>
             {tarefa.editando ? (
               <>

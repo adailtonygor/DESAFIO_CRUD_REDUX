@@ -1,11 +1,10 @@
 import { useReducer } from "react";
 
 function DesafioUm(nomeDeUsuario) {
-
   if (!nomeDeUsuario || typeof nomeDeUsuario !== "string") {
     nomeDeUsuario = "Usuário";
   }
-  
+
   const todosIniciais = [];
   for (let i = 0; i < 15; i++) {
     todosIniciais.push({
@@ -107,7 +106,7 @@ function reducer(state, action) {
   }
 }
 
-export default function ListaDeTarefas() {
+export default function DesafioUseReducer() {
   const [state, dispatch] = useReducer(
     reducer,
     {
