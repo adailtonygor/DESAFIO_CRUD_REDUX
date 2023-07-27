@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import Button from "@material-ui/core/Button/Button";
 
 function DesafioUm(nomeDeUsuario) {
   if (!nomeDeUsuario || typeof nomeDeUsuario !== "string") {
@@ -6,7 +7,7 @@ function DesafioUm(nomeDeUsuario) {
   }
 
   const todosIniciais = [];
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 5; i++) {
     todosIniciais.push({
       id: i,
       texto: nomeDeUsuario + " - Olá pessoas " + (i + 1),
@@ -138,8 +139,10 @@ export default function DesafioUseReducer() {
 
   return (
     <>
+    <h1>Desafio UseReducer</h1>
       <input
         value={state.rascunho}
+        style={{ height: "22px" }}
         onChange={(e) => {
           dispatch({
             type: "alterar_rascunho",
@@ -147,7 +150,10 @@ export default function DesafioUseReducer() {
           });
         }}
       />
-      <button onClick={adicionarTarefa}>Adicionar</button>
+      <Button  variant="outlined"
+        color="primary"
+        size="small"
+        style={{ margin: "3px" }} onClick={adicionarTarefa}>Adicionar</Button>
       <ul>
         {state.todos.map((tarefa) => (
           <li key={tarefa.id}>
@@ -155,6 +161,7 @@ export default function DesafioUseReducer() {
               <>
                 <input
                   value={tarefa.valorEdicao}
+                  style={{ height: "22px" }}
                   onChange={(e) => {
                     const novoValorEdicao = e.target.value;
                     const tarefasAtualizadas = state.todos.map((t) => {
@@ -169,26 +176,39 @@ export default function DesafioUseReducer() {
                     });
                   }}
                 />
-                <button
+                <Button variant="outlined"
+                  color="primary"
+                  size="small"
+                  style={{ margin: "3px" }}
                   onClick={() =>
                     salvarNomeDeUsuario(tarefa.id, tarefa.valorEdicao)
                   }
                 >
                   Salvar
-                </button>
-                <button onClick={() => cancelarEdicaoNomeDeUsuario(tarefa.id)}>
+                </Button>
+                <Button  variant="outlined"
+                  color="secondary"
+                  size="small"
+                   onClick={() => cancelarEdicaoNomeDeUsuario(tarefa.id)}>
                   Cancelar
-                </button>
+                </Button>
               </>
             ) : (
               <>
                 {tarefa.texto}
-                <button onClick={() => editarNomeDeUsuario(tarefa.id)}>
+                <Button variant="outlined"
+                  color="primary"
+                  size="small"
+                  style={{ margin: "3px" }}
+                  onClick={() => editarNomeDeUsuario(tarefa.id)}>
                   Editar
-                </button>
-                <button onClick={() => removerTarefa(tarefa.id)}>
+                </Button>
+                <Button  variant="outlined"
+                  color="secondary"
+                  size="small"
+                  onClick={() => removerTarefa(tarefa.id)}>
                   Remover
-                </button>
+                </Button>
               </>
             )}
           </li>

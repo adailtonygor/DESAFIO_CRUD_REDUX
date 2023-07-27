@@ -1,35 +1,40 @@
-import { Link, Outlet, createBrowserRouter } from "react-router-dom";
+
+import { Link as RouterLink } from "react-router-dom";
+import { AppBar, Toolbar,  Link as MuiLink } from "@material-ui/core";
+import {  Outlet, createBrowserRouter } from "react-router-dom";
 import DesafioRedux from "./pages/DesafioRedux";
 import DesafioToolkit from "./pages/DesafioToolkit";
 import DesafioTrkQuery from "./pages/DesafioTrkQuery";
-import { Provider } from "react-redux";
 import DesafioUseReducer from "./pages/DesafioUseReducer";
+import { Provider } from "react-redux";
 import { storeQuery, storeRedux, storeToolkit } from "./pages/store/store";
-
+import './App.css';
 
 const routes = [
   {
     path: "/",
     element: (
-     
-        <div>
-          <ul>
-            <li>
-              <Link to="desafio-useReducer">DesafioUseReducer</Link>
-            </li>
-            <li>
-              <Link to="desafio-redux">DesafioRedux</Link>
-            </li>
-            <li>
-              <Link to="desafio-toolkit">DesafioToolkit</Link>
-            </li>
-            <li>
-              <Link to="desafio-trkQuery">DesafioTrkQuery</Link>
-            </li>
-          </ul>
-          <Outlet />
-        </div>
-   
+      <>
+        <AppBar position="static" className="navbar">
+
+          <Toolbar>
+           
+            <MuiLink component={RouterLink} to="/desafio-useReducer" color="inherit">
+             <strong>  DesafioUseReducer</strong>
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/desafio-redux" color="inherit">
+            <strong> DesafioRedux</strong>
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/desafio-toolkit" color="inherit">
+            <strong> DesafioToolkit</strong>
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/desafio-trkQuery" color="inherit">
+            <strong> DesafioTrkQuery</strong>
+            </MuiLink>
+          </Toolbar>
+        </AppBar>
+        <Outlet />
+      </>
     ),
     children: [
       { path: "desafio-useReducer", element: <DesafioUseReducer /> },

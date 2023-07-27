@@ -5,6 +5,7 @@ import {
   useUpdateTodoMutation,
   useDeleteTodoMutation,
 } from "../api";
+import Button from "@material-ui/core/Button/Button";
 
 function DesafioTrkQuery() {
   const { data: todos, isLoading, isError, error } = useGetTodosQuery();
@@ -44,15 +45,20 @@ function DesafioTrkQuery() {
 
   return (
     <div>
-      <h1>Lista de dados</h1>
+      <h1>Desafio trk query</h1>
       <div>
         <input
           type="text"
           value={newTodoTitle}
+          style={{ height: "22px" }}
           onChange={(e) => setNewTodoTitle(e.target.value)}
           placeholder="Digite uma nova tarefa"
         />
-        <button onClick={handleCreateTodo}>Adicionar</button>
+        <Button variant="outlined"
+        color="primary"
+        size="small"
+        style={{ margin: "3px" }}
+        onClick={handleCreateTodo}>Adicionar</Button>
       </div>
       {Carregando.isLoading ||
       updateTodoMutation.isLoading ||
@@ -86,21 +92,32 @@ function DesafioTrkQuery() {
                   value={editingTodoTitle}
                   onChange={(e) => setEditingTodoTitle(e.target.value)}
                 />
-                <button
+                <Button variant="outlined"
+        color="primary"
+        size="small"
+        style={{ margin: "3px" }}
                   onClick={() => handleSaveTodo(todo.id, editingTodoTitle)}
                 >
                   Salvar
-                </button>
+                </Button>
               </>
             ) : (
               <>
                 <span>{todo.title}</span>
-                <button onClick={() => setEditingTodoId(todo.id)}>
+                <Button variant="outlined"
+        color="primary"
+        size="small"
+        style={{ margin: "3px" }}
+        onClick={() => setEditingTodoId(todo.id)}>
                   Editar
-                </button>
-                <button onClick={() => handleDeleteTodo(todo.id)}>
+                </Button>
+                <Button variant="outlined"
+                  color="secondary"
+                  size="small"
+                  style={{ margin: "5px" }}
+                  onClick={() => handleDeleteTodo(todo.id)}>
                   Excluir
-                </button>
+                </Button>
               </>
             )}
           </li>
