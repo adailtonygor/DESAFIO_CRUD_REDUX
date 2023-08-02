@@ -8,7 +8,7 @@ import {
   removerTarefaAction,
   alterarValorEdicaoAction,
 } from "./store/actions";
-import { Button } from "@material-ui/core";
+import "./button.css";
 
 export default function DesafioRedux() {
   const rascunho = useSelector((state) => state.rascunho);
@@ -41,88 +41,79 @@ export default function DesafioRedux() {
 
   return (
     <>
-      <h1>Desafio Redux</h1>
-      <input
-        value={rascunho}
-        style={{ height: "22px" }}
-        onChange={(e) => {
-          dispatch(alterarRascunho(e.target.value));
-        }}
-      />
-      <Button
-        variant="outlined"
-        color="primary"
-        size="small"
-        style={{ margin: "3px" }}
-        onClick={adicionarTarefa}
-      >
-        Adicionar
-      </Button>
-      <ul>
-        {todos?.map((tarefa) => (
-          <li key={tarefa.id}>
-            {tarefa.editando ? (
-              <>
-                <input
-                  value={tarefa.valorEdicao}
-                  style={{ height: "22px" }}
-                  onChange={(e) => {
-                    const novoValorEdicao = e.target.value;
-                    const tarefasAtualizadas = todos.map((t) => {
-                      if (t.id === tarefa.id) {
-                        return { ...t, valorEdicao: novoValorEdicao };
-                      }
-                      return t;
-                    });
-                    alterarValorEdicao(tarefasAtualizadas);
-                  }}
-                />
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="small"
-                  style={{ margin: "3px" }}
-                  onClick={() =>
-                    salvarNomeDeUsuario(tarefa.id, tarefa.valorEdicao)
-                  }
-                >
-                  Salvar
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  size="small"
-                  style={{ margin: "5px" }}
-                  onClick={() => cancelarEdicaoNomeDeUsuario(tarefa.id)}
-                >
-                  Cancelar
-                </Button>
-              </>
-            ) : (
-              <>
-                {tarefa.texto}
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  size="small"
-                  style={{ margin: "3px" }}
-                  onClick={() => editarNomeDeUsuario(tarefa.id)}
-                >
-                  Editar
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  size="small"
-                  onClick={() => removerTarefa(tarefa.id)}
-                >
-                  Remover
-                </Button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+      <h1 className="titulo">Desafio Redux</h1>
+      <div className="input__container">
+        <input
+          value={rascunho}
+          placeholder="Digite uma nova tarefa"
+          style={{
+            marginBottom: "50px",
+            height: "27px",
+            width: "35vh",
+            borderRadius: "5px",
+          }}
+          onChange={(e) => {
+            dispatch(alterarRascunho(e.target.value));
+          }}
+        />
+        <button className="action-button" onClick={adicionarTarefa}>
+          Adicionar
+        </button>
+        <ul>
+          {todos?.map((tarefa) => (
+            <li key={tarefa.id}>
+              {tarefa.editando ? (
+                <>
+                  <input
+                    value={tarefa.valorEdicao}
+                    style={{ padding: "12px" }}
+                    onChange={(e) => {
+                      const novoValorEdicao = e.target.value;
+                      const tarefasAtualizadas = todos.map((t) => {
+                        if (t.id === tarefa.id) {
+                          return { ...t, valorEdicao: novoValorEdicao };
+                        }
+                        return t;
+                      });
+                      alterarValorEdicao(tarefasAtualizadas);
+                    }}
+                  />
+                  <button
+                    className="action-button primary"
+                    onClick={() =>
+                      salvarNomeDeUsuario(tarefa.id, tarefa.valorEdicao)
+                    }
+                  >
+                    Salvar
+                  </button>
+                  <button
+                    className="action-button secondary"
+                    onClick={() => cancelarEdicaoNomeDeUsuario(tarefa.id)}
+                  >
+                    Cancelar
+                  </button>
+                </>
+              ) : (
+                <>
+                  {tarefa.texto}
+                  <button
+                    className="action-button primary"
+                    onClick={() => editarNomeDeUsuario(tarefa.id)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="action-button secondary"
+                    onClick={() => removerTarefa(tarefa.id)}
+                  >
+                    Remover
+                  </button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }

@@ -5,7 +5,7 @@ import {
   useUpdateTodoMutation,
   useDeleteTodoMutation,
 } from "../api";
-import Button from "@material-ui/core/Button/Button";
+import "./button.css";
 
 function DesafioTrkQuery() {
   const { data: todos, isLoading, isError, error } = useGetTodosQuery();
@@ -45,21 +45,29 @@ function DesafioTrkQuery() {
 
   return (
     <div>
-      <h1>Desafio trk query</h1>
+      <h1 className="titulo">Desafio trk query</h1>
       <div>
+      <div className="input__container">
         <input
           type="text"
           value={newTodoTitle}
-          style={{ height: "22px" }}
+          style={{
+            marginBottom: "50px",
+            height: "27px",
+            width: "35vh",
+            borderRadius: "5px",
+          }}
           onChange={(e) => setNewTodoTitle(e.target.value)}
           placeholder="Digite uma nova tarefa"
         />
-        <Button variant="outlined"
-        color="primary"
-        size="small"
-        style={{ margin: "3px" }}
-        onClick={handleCreateTodo}>Adicionar</Button>
-      </div>
+        <button
+          className="action-button"
+          style={{ margin: "3px" }}
+          onClick={handleCreateTodo}
+        >
+          Adicionar
+        </button>
+      
       {Carregando.isLoading ||
       updateTodoMutation.isLoading ||
       deleteTodoMutation.isLoading ? (
@@ -92,37 +100,38 @@ function DesafioTrkQuery() {
                   value={editingTodoTitle}
                   onChange={(e) => setEditingTodoTitle(e.target.value)}
                 />
-                <Button variant="outlined"
-        color="primary"
-        size="small"
-        style={{ margin: "3px" }}
+                <button
+                  className="action-button primary"
+                  style={{ margin: "3px" }}
                   onClick={() => handleSaveTodo(todo.id, editingTodoTitle)}
                 >
                   Salvar
-                </Button>
+                </button>
               </>
             ) : (
               <>
                 <span>{todo.title}</span>
-                <Button variant="outlined"
-        color="primary"
-        size="small"
-        style={{ margin: "3px" }}
-        onClick={() => setEditingTodoId(todo.id)}>
+                <button
+                  className="action-button primary"
+                  style={{ margin: "3px" }}
+                  onClick={() => setEditingTodoId(todo.id)}
+                >
                   Editar
-                </Button>
-                <Button variant="outlined"
-                  color="secondary"
-                  size="small"
+                </button>
+                <button
+                  className="action-button secondary"
                   style={{ margin: "5px" }}
-                  onClick={() => handleDeleteTodo(todo.id)}>
+                  onClick={() => handleDeleteTodo(todo.id)}
+                >
                   Excluir
-                </Button>
+                </button>
               </>
             )}
           </li>
         ))}
       </ul>
+    </div>
+    </div>
     </div>
   );
 }

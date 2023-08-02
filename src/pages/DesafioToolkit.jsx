@@ -8,7 +8,7 @@ import {
   removerTarefa,
   alterarValorEdicao,
 } from "./store/tarefasSlice";
-import Button from "@material-ui/core/Button/Button";
+import "./button.css";
 
 export default function ListaDeTarefas() {
   const { rascunho, todos } = useSelector((state) => state.tarefas);
@@ -40,67 +40,79 @@ export default function ListaDeTarefas() {
 
   return (
     <>
-    <h1>Desafio Toolkit</h1>
-      <input
-        value={rascunho}
-        style={{ height: "22px" }}
-        onChange={(e) => dispatch(alterarRascunho(e.target.value))}
-      />
-      <Button variant="outlined"
-                  color="primary"
-                  size="small"
-                  style={{ margin: "3px" }} onClick={handleAdicionarTarefa}>Adicionar</Button>
-      <ul>
-        {todos.map((tarefa) => (
-          <li key={tarefa.id}>
-            {tarefa.editando ? (
-              <>
-                <input
-                  value={tarefa.valorEdicao}
-                  style={{ height: "22px" }}
-                  onChange={(e) =>
-                    handleAlterarValorEdicao(tarefa.id, e.target.value)
-                  }
-                />
-                <Button  variant="outlined"
-                  color="primary"
-                  size="small"
-                  style={{ margin: "3px" }}
-                  onClick={() =>
-                    handleSalvarNomeDeUsuario(tarefa.id, tarefa.valorEdicao)
-                  }
-                >
-                  Salvar
-                </Button>
-                <Button variant="outlined"
-                  color="secondary"
-                  size="small"
-                  style={{ margin: "5px" }}
-                  onClick={() => handleCancelarEdicaoNomeDeUsuario(tarefa.id)}
-                >
-                  Cancelar
-                </Button>
-              </>
-            ) : (
-              <>
-                {tarefa.texto}
-                <Button  variant="outlined"
-                  color="primary"
-                  size="small"
-                  style={{ margin: "3px" }} onClick={() => handleEditarNomeDeUsuario(tarefa.id)}>
-                  Editar
-                </Button>
-                <Button  variant="outlined"
-                  color="secondary"
-                  size="small"
-                  onClick={() => handleRemoverTarefa(tarefa.id)}>
-                  Remover
-                </Button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+      <h1 className="titulo">Desafio Toolkit</h1>
+
+      <div className="input__container">
+        <input
+          value={rascunho}
+          placeholder="Digite uma nova tarefa"
+          style={{
+            marginBottom: "50px",
+            height: "27px",
+            width: "35vh",
+            borderRadius: "5px",
+          }}
+          onChange={(e) => dispatch(alterarRascunho(e.target.value))}
+          
+        />
+        <button
+          className="action-button"
+          style={{ margin: "3px" }}
+          onClick={handleAdicionarTarefa}
+        >
+          Adicionar
+        </button>
+        <ul>
+          {todos.map((tarefa) => (
+            <li key={tarefa.id}>
+              {tarefa.editando ? (
+                <>
+                  <input
+                    value={tarefa.valorEdicao}
+                    style={{ height: "22px" }}
+                    onChange={(e) =>
+                      handleAlterarValorEdicao(tarefa.id, e.target.value)
+                    }
+                  />
+                  <button
+                    className="action-button primary"
+                    style={{ margin: "3px" }}
+                    onClick={() =>
+                      handleSalvarNomeDeUsuario(tarefa.id, tarefa.valorEdicao)
+                    }
+                  >
+                    Salvar
+                  </button>
+                  <button
+                    className="action-button secondary"
+                    style={{ margin: "5px" }}
+                    onClick={() => handleCancelarEdicaoNomeDeUsuario(tarefa.id)}
+                  >
+                    Cancelar
+                  </button>
+                </>
+              ) : (
+                <>
+                  {tarefa.texto}
+                  <button
+                    className="action-button primary"
+                    style={{ margin: "3px" }}
+                    onClick={() => handleEditarNomeDeUsuario(tarefa.id)}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="action-button secondary"
+                    onClick={() => handleRemoverTarefa(tarefa.id)}
+                  >
+                    Remover
+                  </button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
