@@ -12,4 +12,8 @@
 4. Ler a documentação do RTK Query e criar uma aplicação que faça integração com alguma api
   - ex: https://jsonplaceholder.typicode.com/todos - uma app onde o usuário possa consultar, editar e excluir itens da api jsonplaceholder
 
-![image](https://github.com/adailtonygor/DESAFIO_CRUD_REDUX/assets/105685493/a84b58aa-7d2b-42cc-811a-9e0da40df092)
+![image](https://github.com/adailtonygor/DESAFIO_CRUD_REDUX/assets/105685493/378faf44-e50d-4413-9168-7221f7d6bf04)
+
+![image](https://github.com/adailtonygor/DESAFIO_CRUD_REDUX/assets/105685493/157cb6a0-b52c-486b-be37-ccacba6bbe87)
+
+
