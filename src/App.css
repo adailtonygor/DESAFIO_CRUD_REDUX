@@ -9,19 +9,38 @@
 }
 
 :root  {
-  --container: 62px;
+  --container: 65px;
   --borda:var(--tamanho) solid pink;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: rgb(233, 226, 226);
-
-  
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.815), rgb(5, 5, 5)
+  );
 }
 
+.container__Pagina_Inicial {
+  margin-top: 100px;
+  padding: 20px;
+  margin-left: 30px;
+  color: black;
+  box-shadow: 10px 20px 10px 10px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  border: 2px , black;
+  border-radius: 10px;
+  
+ }
+
+ .container__Pagina_Inicial p {
+  font-size:18px;
+  padding: 5px;
+  
+
+
+ }
+ 
+
 .titulo {
-  background-color: #00ff88ab;
   width: 100%;
   border-radius: 10px;
   height: 50px;
@@ -30,13 +49,9 @@ body {
   margin: 40px;
   border-left: 10px solid black;
   padding: 10px;
-  background:#91f7c7ad;
+  background:#00ff88ab;
  
 
-}
-
-.container__inicio {
-  
 }
 
 .input__container {
@@ -46,11 +61,12 @@ body {
     width: 110%;
     border-radius: 10px; 
     margin: 40px;
+    box-shadow: 10px 20px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar a {
   text-decoration: none;
-  color: #333;
+  color: white;
 }
 
 .sidebar a.active {
@@ -82,7 +98,7 @@ main{
 }
 
 .sidebar{
-  background: #000;
+  background: rgb(0, 0, 0);
   overflow-x: hidden;
   color: #fff;
   height: 100vh;
@@ -118,17 +134,26 @@ main{
 
 .link:hover{
   background:#91f7c7ad;
-  color: #000;
+  color: #d6cccc;
   transition: all 0.5s;
 }
 
-.active{
-  background: lightskyblue;
-  color: #000;
-}
 
 .icon, .link_text{
   font-size: 20px;
+}
+
+body::-webkit-scrollbar {
+  width: 3px;
+}
+
+body::-webkit-scrollbar-track {
+  background: linear-gradient(#041833, #154580);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #154580;
+  border-radius: 20px;
 }
 
 @media screen and (max-width: 768px) {
@@ -154,14 +179,4 @@ main{
   }
 }
 
-.container__inicio {
- margin-top: 40px;
- background-color: white;
- padding: 10px;
- border-radius: 20px;
-
-
- 
- 
-}
 

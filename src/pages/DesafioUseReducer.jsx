@@ -185,7 +185,7 @@ export default function DesafioUseReducer() {
                   />
                   <button
                     className="action-button primary"
-                    style={{ margin: "3px" }}
+                    style={{ margin: "3px", marginLeft: "10px" }}
                     onClick={() =>
                       salvarNomeDeUsuario(tarefa.id, tarefa.valorEdicao)
                     }
@@ -204,7 +204,7 @@ export default function DesafioUseReducer() {
                   {tarefa.texto}
                   <button
                     className="action-button primary"
-                    style={{ margin: "3px" }}
+                    style={{ margin: "3px", marginLeft:"25px" }}
                     onClick={() => editarNomeDeUsuario(tarefa.id)}
                   >
                     Editar

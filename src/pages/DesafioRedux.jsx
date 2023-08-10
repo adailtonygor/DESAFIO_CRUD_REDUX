@@ -43,6 +43,7 @@ export default function DesafioRedux() {
     <>
       <h1 className="titulo">Desafio Redux</h1>
       <div className="input__container">
+        
         <input
           value={rascunho}
           placeholder="Digite uma nova tarefa"
@@ -66,7 +67,6 @@ export default function DesafioRedux() {
                 <>
                   <input
                     value={tarefa.valorEdicao}
-                    style={{ padding: "12px" }}
                     onChange={(e) => {
                       const novoValorEdicao = e.target.value;
                       const tarefasAtualizadas = todos.map((t) => {
