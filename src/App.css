@@ -148,11 +148,11 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-track {
-  background: linear-gradient(#041833, #154580);
+  background: linear-gradient(#080808, #000000de);
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #154580;
+  background-color: #2d3642;
   border-radius: 20px;
 }
 
