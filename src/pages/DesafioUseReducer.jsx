@@ -1,27 +1,8 @@
 import { useReducer } from "react";
 import "./button.css";
 
-function DesafioUm(nomeDeUsuario) {
-  if (!nomeDeUsuario || typeof nomeDeUsuario !== "string") {
-    nomeDeUsuario = "Usuário";
-  }
 
-  const todosIniciais = [];
-  for (let i = 0; i < 5; i++) {
-    todosIniciais.push({
-      id: i,
-      texto: nomeDeUsuario + " - Olá pessoas " + (i + 1),
-      editando: false,
-      valorEdicao: "",
-    });
-  }
-  return {
-    rascunho: "",
-    todos: todosIniciais,
-  };
-}
-
-function reducer(state, action) {
+export  function reducer(state, action) {
   switch (action.type) {
     case "alterar_rascunho": {
       return {
@@ -107,15 +88,11 @@ function reducer(state, action) {
   }
 }
 
-export default function DesafioUseReducer() {
-  const [state, dispatch] = useReducer(
-    reducer,
-    {
-      rascunho: "",
-      todos: [],
-    },
-    DesafioUm
-  );
+export function useTodos() {
+  const [state, dispatch] = useReducer(reducer, {
+    rascunho: "",
+    todos: [],
+  });
 
   const adicionarTarefa = () => {
     dispatch({ type: "adicionar_tarefa" });
@@ -136,6 +113,46 @@ export default function DesafioUseReducer() {
   const removerTarefa = (idTarefa) => {
     dispatch({ type: "remover_tarefa", idTarefa });
   };
+  const alterarRascunho = (idTarefa) => {
+    dispatch({ type: "alterar_rascunho", proximoRascunho: idTarefa });
+  };
+  const novoValorEdicao = (idNovaTarefa, idTarefa) => {
+    const novoValorEdicao = idNovaTarefa;
+    const tarefasAtualizadas = state.todos.map((t) => {
+      if (t.id === idTarefa) {
+        return { ...t, valorEdicao: novoValorEdicao };
+      }
+      return t;
+    });
+    dispatch({
+      type: "alterar_valor_edicao",
+      tarefas: tarefasAtualizadas,
+    });
+  };
+
+  return {
+    adicionarTarefa,
+    editarNomeDeUsuario,
+    salvarNomeDeUsuario,
+    cancelarEdicaoNomeDeUsuario,
+    removerTarefa,
+    alterarRascunho,
+    novoValorEdicao,
+    state,
+  };
+}
+
+export default function DesafioUseReducer() {
+  const {
+    state,
+    adicionarTarefa,
+    editarNomeDeUsuario,
+    salvarNomeDeUsuario,
+    cancelarEdicaoNomeDeUsuario,
+    removerTarefa,
+    alterarRascunho,
+    novoValorEdicao,
+  } = useTodos();
 
   return (
     <>
@@ -152,10 +169,7 @@ export default function DesafioUseReducer() {
             borderRadius: "5px",
           }}
           onChange={(e) => {
-            dispatch({
-              type: "alterar_rascunho",
-              proximoRascunho: e.target.value,
-            });
+            alterarRascunho(e.target.value);
           }}
         />
         <button className="action-button" onClick={adicionarTarefa}>
@@ -170,17 +184,7 @@ export default function DesafioUseReducer() {
                     value={tarefa.valorEdicao}
                     style={{ height: "22px" }}
                     onChange={(e) => {
-                      const novoValorEdicao = e.target.value;
-                      const tarefasAtualizadas = state.todos.map((t) => {
-                        if (t.id === tarefa.id) {
-                          return { ...t, valorEdicao: novoValorEdicao };
-                        }
-                        return t;
-                      });
-                      dispatch({
-                        type: "alterar_valor_edicao",
-                        tarefas: tarefasAtualizadas,
-                      });
+                      novoValorEdicao(e.target.value, tarefa.id);
                     }}
                   />
                   <button
@@ -204,7 +208,7 @@ export default function DesafioUseReducer() {
                   {tarefa.texto}
                   <button
                     className="action-button primary"
-                    style={{ margin: "3px", marginLeft:"25px" }}
+                    style={{ margin: "3px", marginLeft: "25px" }}
                     onClick={() => editarNomeDeUsuario(tarefa.id)}
                   >
                     Editar
