@@ -56,17 +56,17 @@ const Sidebar = () => {
         </div>
         <div className="menu_items">
           {menuItem.map((item, index) => (
-            <NavLink
-              to={item.path}
-              key={index}
-              className="link"
-              activeClassName="active"
-              onClick={() => {
-                if (window.innerWidth <= 768) {
-                  toggle();
-                }
-              }}
-            >
+           <NavLink
+           to={item.path}
+           key={index}
+           className="link"
+           activeclassname="active"
+           onClick={() => {
+             if (window.innerWidth <= 768) {
+               toggle();
+             }
+           }}
+         >
               <div className="icon">{item.icon}</div>
               <div
                 style={{
